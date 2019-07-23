@@ -15,7 +15,7 @@ function createButtons(){
 
 
 function ajaxCall(queryT) {
-    console.log('Entered ajaxCall')   
+ 
     $.ajax({
         url: 'https://api.giphy.com/v1/gifs/search?api_key=6wXTpBjvupFamLaB1TrFHLTB86kNnlFn&limit=10&q=' + queryT,
         method: "GET"
@@ -40,12 +40,11 @@ function ajaxCall(queryT) {
             itemImage.data('animate', results[i].images.fixed_height.url);
             itemImage.data('still', results[i].images.fixed_height_still.url);
             itemImage.data('state', 'still');
-            itemImage.addClass('image');
             // Appending the paragraph and itemImage we created to the "gifDiv" div we created
             gifDiv.append(p);
             gifDiv.append(itemImage);
 
-            // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
+            // Prepending the gifDiv to the "#imageSection" div in the HTML
             $("#imageSection").prepend(gifDiv);
 
         }
@@ -53,13 +52,15 @@ function ajaxCall(queryT) {
     });
 }
 
-$('.image').on('click', function () {
-    console.log('test')
-    if (this.data('state') === 'still') {
+$(document).on("click", "img", function(){
+    if ($(this).data('state') === 'still') {
 
         $(this).attr('src', $(this).data('animate')) //sets image to animate if it is currently still
+        $(this).data('state', 'animate');
     } else {
-        $(this).attr('src', $(this).data('animate'))
+
+        $(this).attr('src', $(this).data('still'))
+        $(this).data('state', 'still');
     }
 });
 
