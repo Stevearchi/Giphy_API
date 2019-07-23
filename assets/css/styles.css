@@ -1,0 +1,10 @@
+.newButtonForm {
+    float: right;
+    /* left: 100px; */
+    width: 35%;
+}
+
+#imageSection {
+    width: 65%;
+    float: left;
+}
